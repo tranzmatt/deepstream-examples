@@ -221,13 +221,13 @@ def main(args):
 
     # Primary Inferance
     pgie = create_element_or_error("nvinfer", "primary-inference")
-    pgie.set_property('config-file-path', "/opt/nvidia/deepstream/deepstream/samples/configs/deepstream-app/config_infer_primary.txt")
+    pgie.set_property('config-file-path', "/opt/nvidia/deepstream/deepstream-5.1/samples/configs/deepstream-app/config_infer_primary.txt")
     pipeline.add(pgie)
     streammux.link(pgie)
 
     # Tracker
     tracker = create_element_or_error("nvtracker", "tracker")
-    tracker.set_property('ll-lib-file', '/opt/nvidia/deepstream/deepstream/lib/libnvds_nvdcf.so')
+    tracker.set_property('ll-lib-file', '/opt/nvidia/deepstream/deepstream-5.1/lib/libnvds_nvdcf.so')
     tracker.set_property('gpu-id', 0)
     tracker.set_property('enable-past-frame', 1)
     tracker.set_property('enable-batch-process', 1)
@@ -236,7 +236,7 @@ def main(args):
 
     # Second Inferance
     sgie = create_element_or_error("nvinfer", "secondary-inference")
-    sgie.set_property('config-file-path', "/opt/nvidia/deepstream/deepstream/samples/configs/deepstream-app/config_infer_secondary_carmake.txt")
+    sgie.set_property('config-file-path', "/opt/nvidia/deepstream/deepstream-5.1/samples/configs/deepstream-app/config_infer_secondary_carmake.txt")
     sgie.set_property('unique-id', 12345)
     pipeline.add(sgie)
     tracker.link(sgie)

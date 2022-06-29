@@ -19,7 +19,7 @@ import pyds
 
 '''
 gst-launch-1.0 nvstreammux name=mux live-source=1 sync-inputs=1 batch-size=3 width=3264 height=1848 batched-push-timeout=4000000 ! \
-nvinfer config-file-path=/opt/nvidia/deepstream/deepstream/samples/configs/deepstream-app/config_infer_primary.txt ! \
+nvinfer config-file-path=/opt/nvidia/deepstream/deepstream-5.1/samples/configs/deepstream-app/config_infer_primary.txt ! \
 nvstreamdemux name=demux \
 
 nvarguscamerasrc sensor-id=0 bufapi-version=1 ! "video/x-raw(memory:NVMM), width=(int)3264, height=(int)1848, framerate=30/1, format=(string)NV12" ! mux.sink_0 \
@@ -54,13 +54,13 @@ def main(args):
 
     # Primart Inferance
     pgie = create_element_or_error("nvinfer", "primary-inference")
-    pgie.set_property('config-file-path', "/opt/nvidia/deepstream/deepstream/samples/configs/deepstream-app/config_infer_primary.txt")
+    pgie.set_property('config-file-path', "/opt/nvidia/deepstream/deepstream-5.1/samples/configs/deepstream-app/config_infer_primary.txt")
     pipeline.add(pgie)
     muxer.link(pgie)
 
     #Tracker
     tracker = create_element_or_error("nvtracker", "tracker")
-    tracker.set_property('ll-lib-file', '/opt/nvidia/deepstream/deepstream/lib/libnvds_mot_klt.so')
+    tracker.set_property('ll-lib-file', '/opt/nvidia/deepstream/deepstream-5.1/lib/libnvds_mot_klt.so')
     tracker.set_property('gpu-id', 0)
     tracker.set_property('enable-past-frame', 1)
     tracker.set_property('enable-batch-process', 1)

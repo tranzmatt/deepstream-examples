@@ -68,12 +68,12 @@ def main():
         srcpad.link(sinkpad)
 
     pgie = create_element_or_error("nvinfer", "primary-inference")
-    pgie.set_property('config-file-path', "/opt/nvidia/deepstream/deepstream/samples/configs/deepstream-app/config_infer_primary.txt")
+    pgie.set_property('config-file-path', "/opt/nvidia/deepstream/deepstream-5.1/samples/configs/deepstream-app/config_infer_primary.txt")
     pipeline.add(pgie)
     muxer.link(pgie)
 
     tracker = create_element_or_error("nvtracker", "tracker")
-    tracker.set_property('ll-lib-file', '/opt/nvidia/deepstream/deepstream/lib/libnvds_nvdcf.so')
+    tracker.set_property('ll-lib-file', '/opt/nvidia/deepstream/deepstream-5.1/lib/libnvds_nvdcf.so')
     tracker.set_property('enable-batch-process', 1)
     tracker.set_property('tracker-width', 640)
     tracker.set_property('tracker-height', 480)
